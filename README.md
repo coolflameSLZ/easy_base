@@ -23,5 +23,5 @@ keep going....
 
 | 项目名称 | 项目介绍                                                     | 端口号                    |
 | -------- | ------------------------------------------------------------ | ----------------------------- |
-| wekan    | 【敏捷看板】<br>使用docker-compose 单机部署, <br>该项目使用MongoDB v3 作为存储 | MongoDB: 37017<br>wekan: 8080 |
+| wekan    | 【敏捷看板】<br>使用docker-compose 单机部署, <br>依赖 MongoDB 4.2 | MongoDB: 37017<br>wekan: 10001 |
 
