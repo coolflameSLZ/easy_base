@@ -1,39 +1,42 @@
-
-
-# default environment = wekan.env
 version: '3'
+
 services:
-  # 数据库 mongodb------------------------------------------------------------------------------
+
   wekandb:
-    image: mongo:3.2.20
+    #-------------------------------------------------------------------------------------
+    image: mongo:4.2
     container_name: wekan-db
     restart: always
-    command: mongod --smallfiles --oplogSize 128
+    command: mongod --oplogSize 128
     networks:
       - wekan-tier
-    ports:
-      - 27017:27017
+    expose:
+      - 27017
     volumes:
-      - /docker/wekandb/data:/data/db
-      - /docker/wekandb/dump:/dump
+      - /docker/wekan-db:/data/db
+      - /docker/wekan-db-dump:/dump
 
-    # wekan -------------------------------------------------------------------------------------
   wekan:
-    image: wekanteam/wekan:v2.17
+    #-------------------------------------------------------------------------------------
+    image: wekanteam/wekan:v4.23
     container_name: wekan-app
     restart: always
     networks:
       - wekan-tier
     ports:
-      - 8080:8080
-    #---------------------------------------------------------------------------------------------
+      - 10001:8080
     environment:
       - MONGO_URL=${MONGO_URL}
       - ROOT_URL=${ROOT_URL}
+      - MAIL_URL=${MAIL_URL}
+      - MAIL_FROM=${MAIL_FROM}
       - WITH_API=${WITH_API}
+      - RICHER_CARD_COMMENT_EDITOR=${RICHER_CARD_COMMENT_EDITOR}
+      - CORS=${CORS}
       - BROWSER_POLICY_ENABLED=${BROWSER_POLICY_ENABLED}
     depends_on:
       - wekandb
+
 networks:
   wekan-tier:
     driver: bridge
