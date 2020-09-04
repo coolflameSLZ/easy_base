@@ -13,8 +13,8 @@ services:
     expose:
       - 27017
     volumes:
-      - /docker/wekan-db:/data/db
-      - /docker/wekan-db-dump:/dump
+      - /docker/wekan/wekan-db:/data/db
+      - /docker/wekan/wekan-db-dump:/dump
 
   wekan:
     #-------------------------------------------------------------------------------------
