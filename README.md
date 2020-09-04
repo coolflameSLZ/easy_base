@@ -23,5 +23,6 @@ time
 
 | 项目名称 | 项目介绍                                                     | 端口号                    |
 | -------- | ------------------------------------------------------------ | ----------------------------- |
-| wekan    | 【敏捷看板】<br>使用docker-compose 单机部署, <br>依赖 MongoDB 4.2 | MongoDB: 37017<br>wekan: 10001 |
+| wekan    | 【敏捷看板】<br>使用docker-compose 单机部署, <br>依赖 MongoDB 4.2 | wekan: 10001<br>MongoDB: 37017 |
+| gitlab    | <br>使用docker-compose 单机部署, <br>依赖 postgresql 11  <br>依赖 redis 5 | gitlab: 10080<br> postgresql 不暴露端口 <br> redis 不暴露端口 |
 
