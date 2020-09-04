@@ -21,3 +21,11 @@ gitlab 无需多解释，
 #####   如何使用 
 
     $ sh starup.sh
+
+
+#####   说明
+    
+    ci 流水线使用 gitlab ci, 编译容器与 gitlab容器隔离。
+    使用gitlab ci runner 独立部署后，注册到 gitlab 上。
+
+    
