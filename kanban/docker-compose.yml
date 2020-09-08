@@ -7,7 +7,6 @@ services:
     image: mongo:4.2
     container_name: wekan-db
     restart: always
-    command: mongod --oplogSize 128
     networks:
       - wekan-tier
     expose:
@@ -15,6 +14,7 @@ services:
     volumes:
       - /docker/wekan/wekan-db:/data/db
       - /docker/wekan/wekan-db-dump:/dump
+    command: mongod --oplogSize 128
 
   wekan:
     #-------------------------------------------------------------------------------------
