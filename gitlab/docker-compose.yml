@@ -1,18 +1,21 @@
-version: '3.4'
+version: '3.8'
 
 services:
   redis:
     restart: always
     image: redis:5.0.9
+    networks:
+      - gitlab-tier
     command:
       - --loglevel warning
     volumes:
-      - TZ=${TZ}
       - /docker/gitlab/redis-data:/var/lib/redis:Z
 
   postgresql:
     restart: always
     image: sameersbn/postgresql:11-20200524
+    networks:
+      - gitlab-tier
     volumes:
       - /docker/gitlab/postgresql-data:/var/lib/postgresql:Z
     environment:
@@ -25,6 +28,8 @@ services:
   gitlab:
     restart: always
     image: sameersbn/gitlab:13.3.1
+    networks:
+      - gitlab-tier
     depends_on:
       - redis
       - postgresql
@@ -112,4 +117,5 @@ services:
 
 networks:
   gitlab-tier:
-    driver: bridge
+    name: gitlab-tier
+    driver: overlay
