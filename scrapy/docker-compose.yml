@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  portia:
+    image: scrapinghub/portia:latest
+    volumes:
+      - ./data/portia/projects:/app/data/projects
+    ports:
+      - 9001:9001
+    restart: always
+
+  scrapyd:
+    image: vimagick/scrapyd:py3
+    ports:
+      - 6800:6800
+    volumes:
+      - ./data/scrapyd:/var/lib/scrapyd
+      - ./data/scrapyd/python3.7/dist-packages:/usr/local/lib/python3.7/dist-packages
+    restart: unless-stopped
+
+  scrapy:
+    image: vimagick/scrapyd:py3
+    command: bash
+    volumes:
+      - ./data/scrapy/code:/code
+    working_dir: /code
+    restart: unless-stopped
+
+  scrapyrt:
+    image: vimagick/scrapyd:py3
+    command: scrapyrt -i 0.0.0.0 -p 9080
+    ports:
+      - 9080:9080
+    volumes:
+      - ./data/scrapy/code:/code
+    working_dir: /code
+    restart: unless-stopped
